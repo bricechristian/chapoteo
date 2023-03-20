@@ -30,7 +30,7 @@
 // TAILWIND:BASE
 @layer base {
 	html {
-		@apply scroll-smooth tracking-tight leading-normal;
+		@apply scroll-smooth tracking-tight leading-normal overflow-hidden;
 	}
 	body {
 		@apply antialiased flex flex-col min-h-screen font-sans;	
