@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "SculpinBold";
+	src: url("/Sculpin-Bold.woff");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "HumaneMedium";
+	src: url("/Humane-Medium.woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "HumaneBold";
+	src: url("/Humane-Bold.woff");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "ApfelGrotezk";
+	src: url("/ApfelGrotezk-Regular.woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+// TAILWIND:BASE
+@layer base {
+	html {
+		@apply scroll-smooth tracking-tight leading-normal;
+	}
+	body {
+		@apply antialiased flex flex-col min-h-screen font-sans;
+	}
+	main {
+		@apply flex-grow flex;
+	}
+	a {
+		transition: 0.3s;
+	}
+	//TYPOGRAPHY
+	.headline {
+		@apply font-heading-bold uppercase text-[clamp(60px,10vw,100px)] leading-[.75];
+    &-stroke {
+      @apply font-heading-bold uppercase text-[clamp(60px,10vw,100px)] leading-[.75] text-transparent;
+      -webkit-text-stroke-width: clamp(.5px,.1vw,1px);
+      -webkit-text-stroke-color: theme('colors.black');		
+    }    
+	}
+	.caps {
+		@apply font-eyebrow text-14 tracking-wide uppercase;
+		&-12 {
+			@apply font-eyebrow text-12 tracking-wide uppercase;
+		}
+	}
+}
+
+// TAILWIND:UTILITIES
+@layer utilities {
+	.container-base {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.container {
+		@apply container-base px-6;
+		max-width: 1440px;
+		&-full {
+			@apply container-base px-6;
+			max-width: 100%;
+		}
+		&-1280 {
+			@apply container-base px-6;
+			max-width: 1280px;
+		}
+		&-1060 {
+			@apply container-base px-6;
+			max-width: 1060px;
+		}
+		&-960 {
+			@apply container-base px-6;
+			max-width: 960px;
+		}
+		&-768 {
+			@apply container-base px-6;
+			max-width: 768px;
+		}
+		&-700 {
+			@apply container-base px-6;
+			max-width: 700px;
+		}
+	}
+	.invisible {
+		opacity: 0;
+		visibility: hidden;
+	}
+	.visible {
+		opacity: 1;
+		visibility: visible;
+	}
+	.transition-smooth {
+		transition: 0.3s;
+	}
+	.grid-layout {
+		@apply grid grid-cols-12 w-full md:grid-cols-10;
+	}
+}
+
+.card {
+	@apply absolute inset-x-0 mx-auto w-full flex flex-col items-center max-w-3xl bg-neutral border rounded-3xl;
+}
