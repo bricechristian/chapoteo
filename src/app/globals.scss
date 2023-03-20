@@ -109,6 +109,12 @@
 	}
 }
 
+@media (max-height: 570px){
+  h1.title, ol.instructions {
+    @apply hidden;
+  }
+}
+
 .card {
 	@apply absolute inset-x-0 mx-auto w-full flex flex-col items-center max-w-3xl bg-neutral border rounded-3xl;
 }

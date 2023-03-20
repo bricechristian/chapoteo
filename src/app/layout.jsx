@@ -22,6 +22,12 @@ export const metadata = {
     locale: "en-US",
     type: "website",
   },
+  manifest: `${process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"}/site.webmanifest`,
+  icons: {
+    icon: `${process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"}/favicon-32x32.png`,
+    shortcut: `${process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"}/android-chrome-512x512.png`,
+    apple: `${process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"}/apple-touch-icon.png`
+  },  
 }
 
 export default function RootLayout({ children }) {
