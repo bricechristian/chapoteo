@@ -1,5 +1,4 @@
 import './globals.scss'
-import {isMobile} from 'react-device-detect';
 
 export const metadata = {
   title: 'Chapoteo (Splash)',
@@ -34,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${isMobile ? "mobile" : ""}`}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }

@@ -34,9 +34,9 @@
 	}
 	body {
 		@apply antialiased flex flex-col min-h-screen font-sans;
-    &.mobile {
+    @media only screen and (max-width: 415px) {
       min-height: -webkit-fill-available;
-    }
+    }    
 	}
 	main {
 		@apply flex-grow flex;
