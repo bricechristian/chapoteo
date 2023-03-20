@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/solid";
 
 import data from "../../public/vocab.json";
+import ClientScripts from "./components/ClientScripts";
 import CardList from "./components/CardList";
 
 const Home = () => {
@@ -38,7 +39,8 @@ const Home = () => {
 						to shuffle the cards and start over.
 					</li>
 				</ol>
-			</div>
+			</div> 
+			<ClientScripts />
 		</main>
 	);
 };
