@@ -109,7 +109,7 @@
 	}
 }
 
-@media (max-height: 570px){
+@media (max-height: 470px) and (orientation: landscape){
   h1.title, ol.instructions {
     @apply hidden;
   }
