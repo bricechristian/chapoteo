@@ -49,7 +49,9 @@ const Card = ({
 				</span>
 			</div>
 			<div
-				className={`relative flex justify-center w-full text-center p-10 pb-16${cardIndex > activeIndex ? " opacity-0" : ""}`}
+				className={`relative flex justify-center w-full text-center p-10${
+					cardIndex > activeIndex ? " opacity-0" : ""
+				}`}
 				onClick={() => setFlipped(!flipped)}>
 				<div className="headline cursor-pointer">
 					<span
@@ -66,33 +68,34 @@ const Card = ({
 					</span>
 				</div>
 			</div>
-			<div className={`caps flex justify-between w-full p-4${cardIndex > activeIndex ? " opacity-0" : ""}`}>
+			<div
+				className={`caps flex justify-between w-full p-4${
+					cardIndex > activeIndex ? " opacity-0" : ""
+				}`}>
 				<span
-					className={`absolute z-10 bottom-6 left-4 inline-flex transition${
+					className={`z-10 relative -bottom-4 -left-4 p-6 inline-flex transition${
 						flipped ? " opacity-0" : ""
 					}`}
-					>
-                        <div className="relative inline-flex group items-center p-6">
-
-					<ArrowLeftIcon
-						className={`w-7 absolute left-0 bottom-0${
-							activeIndex > 1
-								? " cursor-pointer transition supports-hover:hover:scale-90"
-								: " opacity-30"
-						}`}
-                        onClick={() =>
-                            setActiveIndex(activeIndex > 1 ? activeIndex - 1 : 1)
-                        }
-					/>
-					<span
-						className={`caps-12 absolute bottom-2 left-0 invisible transition-smooth ${
-							activeIndex > 1
-								? " supports-hover:group-hover:visible supports-hover:group-hover:-translate-y-5"
-								: ""
-						}`}>
-						Prev
-					</span>
-                        </div>
+					onClick={() =>
+						setActiveIndex(activeIndex > 1 ? activeIndex - 1 : 1)
+					}>
+					<div className="relative inline-flex group items-center">
+						<ArrowLeftIcon
+							className={`w-7 -left-6 -bottom-6${
+								activeIndex > 1
+									? " cursor-pointer transition supports-hover:hover:scale-90"
+									: " opacity-30"
+							}`}
+						/>
+						<span
+							className={`caps-12 absolute bottom-2 left-0 invisible transition-smooth ${
+								activeIndex > 1
+									? " supports-hover:group-hover:visible supports-hover:group-hover:-translate-y-5"
+									: ""
+							}`}>
+							Prev
+						</span>
+					</div>
 				</span>
 				<span
 					className={`p-6 absolute bottom-0 inset-x-0 mx-auto flex justify-center transition${
