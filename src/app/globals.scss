@@ -39,10 +39,10 @@
 				min-height: -webkit-fill-available;
 			}  
 		}
-		&.mobile {
-			min-height: -webkit-fill-available;
-		}	
 	}
+	body.mobile {
+		min-height: -webkit-fill-available;
+	}	
 	main {
 		@apply flex-grow flex;
 	}
