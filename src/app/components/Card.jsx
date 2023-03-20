@@ -49,7 +49,7 @@ const Card = ({
 				</span>
 			</div>
 			<div
-				className={`relative flex justify-center w-full text-center p-10${
+				className={`relative flex justify-center w-full text-center p-10 pb-0${
 					cardIndex > activeIndex ? " opacity-0" : ""
 				}`}
 				onClick={() => setFlipped(!flipped)}>
@@ -73,7 +73,7 @@ const Card = ({
 					cardIndex > activeIndex ? " opacity-0" : ""
 				}`}>
 				<span
-					className={`z-10 relative -bottom-4 -left-4 p-6 inline-flex transition${
+					className={`z-10 relative -bottom-4 -left-4 p-6 inline-flex transition select-none${
 						flipped ? " opacity-0" : ""
 					}`}
 					onClick={() =>
@@ -103,7 +103,7 @@ const Card = ({
 					}`}>
 					<div className="relative inline-flex group">
 						<RectangleStackIcon
-							className={`w-7 inline-flex mx-auto cursor-pointer transition supports-hover:hover:scale-90`}
+							className={`w-7 inline-flex mx-auto cursor-pointer transition select-none supports-hover:hover:scale-90`}
 							onClick={() => handleShuffleCards()}
 						/>
 						<span
@@ -113,7 +113,7 @@ const Card = ({
 					</div>
 				</span>
 				<span
-					className={`p-6 absolute bottom-0 right-0 inline-block group cursor-pointer transition${
+					className={`p-6 absolute bottom-0 right-0 inline-block group cursor-pointer transition select-none${
 						flipped ? " opacity-0" : ""
 					}`}
 					onClick={() => setActiveIndex(activeIndex + 1)}>
