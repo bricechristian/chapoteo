@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
 	ArrowRightIcon,
 	ArrowLeftIcon,
@@ -20,6 +20,7 @@ const Card = ({
 	const [loadingSound, setLoadingSound] = useState(false);
 	const [sound, setSound] = useState("");
 	const [soundError, setSoundError] = useState("");
+	const audioRef = useRef(null)
 	const handleAudioClick = async () => {
 		setLoadingSound(true);
 		setSoundError("")
@@ -35,7 +36,8 @@ const Card = ({
 	}
 	useEffect(() => {
 		if(!loadingSound && sound.length) {
-			new Audio(sound).play();
+			audioRef.current.play();
+			console.log(audioRef.current)
 		}
 	}, [loadingSound, sound])
 	useEffect(() => {
@@ -76,6 +78,7 @@ const Card = ({
 					({cardIndex < 10 ? "0" : ""}
 					{cardIndex}/{cards})
 				</span>
+				<audio ref={audioRef} src={sound} controls className="hidden" />
 			</div>
 			<div
 				className={`relative flex justify-center w-full text-center p-10 pb-0${
