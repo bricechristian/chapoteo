@@ -17,6 +17,31 @@ const Card = ({
 	setActiveIndex,
 }) => {
 	const [flipped, setFlipped] = useState(false);
+	const [loadingSound, setLoadingSound] = useState(false);
+	const [sound, setSound] = useState("");
+	const [soundError, setSoundError] = useState("");
+	const handleAudioClick = async () => {
+		setLoadingSound(true);
+		setSoundError("")
+		const response = await fetch(`/api/audio?word=${data.targetWord.toLowerCase()}`);
+		if(response.ok){
+			const audioData = await response.json();
+			const { audioKey } = await audioData;
+			setSound(`https://media.merriam-webster.com/audio/prons/es/me/mp3/${audioKey.slice(0,1)}/${audioKey}.mp3`);
+			setLoadingSound(false);
+		} else {
+			setSoundError("Sorry, sound not available.")
+		}
+	}
+	useEffect(() => {
+		if(!loadingSound && sound.length) {
+			new Audio(sound).play();
+		}
+	}, [loadingSound, sound])
+	useEffect(() => {
+		setSound("");
+		setLoadingSound(false);
+	}, [activeIndex])
 	return (
 		<div
 			className={`card transition-smooth${
@@ -44,8 +69,8 @@ const Card = ({
 				className={`caps flex w-full justify-end p-4 relative transition${
 					flipped ? " opacity-0" : ""
 				}${cardIndex > activeIndex ? " opacity-0" : ""}`}>
-				<span className="inline-block p-4 cursor-pointer absolute top-0 left-0 transition supports-hover:hover:scale-90">
-					<SpeakerWaveIcon className={`w-6`} />
+				<span className={`inline-block p-4 cursor-pointer absolute z-10 top-0 left-0 transition supports-hover:hover:scale-90${soundError.length ? " pointer-events-none sm:max-w-[200px]" : ""}`} onClick={() => handleAudioClick()}>
+					{soundError.length ? <span className="text-[10px]">{soundError}</span> : <SpeakerWaveIcon className={`w-6`} />}
 				</span>
 				<span className="inline-block">
 					({cardIndex < 10 ? "0" : ""}
