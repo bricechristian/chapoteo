@@ -5,6 +5,7 @@ import {
 	ArrowRightIcon,
 	ArrowLeftIcon,
 	RectangleStackIcon,
+	SpeakerWaveIcon,
 } from "@heroicons/react/24/solid";
 
 const Card = ({
@@ -40,9 +41,12 @@ const Card = ({
 			key={data.rank}
 			style={{ zIndex: cards - cardIndex }}>
 			<div
-				className={`caps flex w-full justify-end p-4 transition${
+				className={`caps flex w-full justify-end p-4 relative transition${
 					flipped ? " opacity-0" : ""
 				}${cardIndex > activeIndex ? " opacity-0" : ""}`}>
+				<span className="inline-block p-4 cursor-pointer absolute top-0 left-0 transition supports-hover:hover:scale-90">
+					<SpeakerWaveIcon className={`w-6`} />
+				</span>
 				<span className="inline-block">
 					({cardIndex < 10 ? "0" : ""}
 					{cardIndex}/{cards})
