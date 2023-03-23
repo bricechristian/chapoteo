@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "ngrok": "ngrok http 3000",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -16,11 +17,14 @@
   "devDependencies": {
     "@ducanh2912/next-pwa": "^8.1.1",
     "@heroicons/react": "^2.0.16",
+    "@svgr/webpack": "^6.5.1",
     "autoprefixer": "^10.4.14",
     "most-common-words-by-language": "^3.0.12",
     "next-pwa": "^5.6.0",
+    "ngrok": "^4.3.3",
     "postcss": "^8.4.21",
     "react-device-detect": "^2.2.3",
+    "react-use-audio-player": "^1.2.6",
     "sass": "^1.59.3",
     "tailwindcss": "^3.2.7",
     "thousand-most-common-words": "^1.0.1"
