@@ -21,10 +21,15 @@ function shuffle(arra1) {
 const CardList = ({ data }) => {
 	const [activeIndex, setActiveIndex] = useState(1);
 	const [words, setWords] = useState(data);
+	const [shuffled, setShuffled] = useState(false);
 	const handleShuffleCards = () => {
+		setShuffled(true)
 		const shuffledWords = shuffle([...words]);
 		setWords(shuffledWords);
 		setActiveIndex(1);
+		setTimeout(() => {
+			setShuffled(false)
+		}, 300);
 	};
 
 	return (
@@ -35,6 +40,7 @@ const CardList = ({ data }) => {
 						return (
 							<Card
 								words={words}
+								shuffled={shuffled}
 								handleShuffleCards={handleShuffleCards}
 								cards={data.length}
 								cardIndex={index + 1}

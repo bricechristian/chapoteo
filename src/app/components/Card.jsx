@@ -9,53 +9,82 @@ import {
 } from "@heroicons/react/24/solid";
 import { AudioPlayerProvider, useAudioPlayer } from "react-use-audio-player"
 import Spinner from "../../../public/spinner.svg";
-const AudioPlayer = ({ data, activeIndex } ) => {
+const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 
+	const [soundReady, setSoundReady] = useState(true);
 	const [clicked, setClicked] = useState(false);
+	const [played, setPlayed] = useState(false);
 	const [initialLoad, setInitialLoad] = useState(false);
-	const [sound, setSound] = useState("https://media.merriam-webster.com/audio/prons/es/me/mp3/c/como001sp.mp3");
+	const [sound, setSound] = useState("");
 	const [soundError, setSoundError] = useState("");
 
-	const { togglePlayPause, ready, loading } = useAudioPlayer({
+	const { player, load, play, stop, volume, ready, loading, playing } = useAudioPlayer({
         src: sound,
         format: "mp3",
         autoplay: false,
+		preload: false,
+		onplay: () => {
+			setPlayed(true);
+			setInitialLoad(false);
+			setClicked(false);
+		},
         onend: () => {
 			setClicked(false);
+			setInitialLoad(false);
 		}
     })
 
-	const handleAudioClick = async () => {
+	const handleAudioClick = async (e) => {
+		e.preventDefault();
+		setInitialLoad(true);
 		setClicked(true);
 		setSoundError("")
-		const response = await fetch(`/api/audio?word=${data.targetWord.toLowerCase()}`);
-		if(response.ok){
-			const audioData = await response.json();
-			const { audioKey } = await audioData;
-			setSound(`https://media.merriam-webster.com/audio/prons/es/me/mp3/${audioKey.slice(0,1)}/${audioKey}.mp3`);
-		} else {
-			setSoundError("Sorry, sound not available.")
+		// console.log(data.targetWord.toLowerCase())
+		// console.log(sound)
+		if(!sound.length || !soundReady){
+			const response = await fetch(`/api/audio?word=${data.targetWord.toLowerCase()}`);
+			if(response.ok){
+				const audioData = await response.json();
+				if(Object.keys(audioData.data).length === 0){
+					setInitialLoad(false);
+					setSoundError("Sorry, sound not available.")
+				} else {
+					const { pathmp3 } = await audioData.data;
+					setSound(pathmp3);
+					setSoundReady(true);
+				}
+			} else {
+				setInitialLoad(false);
+				setSoundError("Sorry, sound not available.")
+			}
 		}
 	}
 	useEffect(() => {
-		if(ready) {
-			setInitialLoad(false);
-		} else {
-			setInitialLoad(true);
+		if(soundReady && !loading && sound.length && clicked) {
+			load();
+			play();
 		}
-	}, [ready])
+	}, [soundReady, loading, sound, clicked])
 	useEffect(() => {
-		if(!loading && sound.length && clicked && ready) {
-			togglePlayPause()
+		if(playing) {
 			setInitialLoad(false);
+			setClicked(false);
 		}
-	}, [loading, sound, ready, clicked])
+	}, [playing])
 	useEffect(() => {
-		setSound("");
-	}, [activeIndex])
+		if(shuffled && player){
+			player.unload()
+			setSound("");
+			setSoundReady(false);
+			console.log("UNLOADED")
+		}
+	}, [shuffled, player])
+	useEffect(() => {
+		console.log(`${data.targetWord.toLowerCase()} : ${player}`)	
+	})
 
     return (
-		<span className={`inline-block p-4 cursor-pointer absolute z-10 top-0 left-0 transition supports-hover:hover:scale-90${soundError.length ? " pointer-events-none sm:max-w-[200px]" : ""}`} onClick={() => handleAudioClick()}>
+		<span className={`inline-block p-4 cursor-pointer absolute z-10 top-0 left-0 transition supports-hover:hover:scale-90${soundError.length ? " pointer-events-none sm:max-w-[200px]" : ""}`} onClick={(e) => handleAudioClick(e)}>
 			{soundError.length ? <span className="text-[10px]">{soundError}</span> : initialLoad ? <Spinner className="animate-spin h-5 w-5 text-black" /> : <SpeakerWaveIcon className={`w-6 relative z-10`} />  }
 		</span>		
     )
@@ -65,6 +94,7 @@ const Card = ({
 	cards,
 	data,
 	cardIndex,
+	shuffled,
 	handleShuffleCards,
 	activeIndex,
 	setActiveIndex,
@@ -98,7 +128,7 @@ const Card = ({
 					className={`caps flex w-full justify-end p-4 relative transition${
 						flipped ? " opacity-0" : ""
 					}${cardIndex > activeIndex ? " opacity-0" : ""}`}>
-					<AudioPlayer data={data} activeIndex={activeIndex} />
+					<AudioPlayer data={data} shuffled={shuffled} activeIndex={activeIndex} />
 					<span className="inline-block">
 						({cardIndex < 10 ? "0" : ""}
 						{cardIndex}/{cards})
