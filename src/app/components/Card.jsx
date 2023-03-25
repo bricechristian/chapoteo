@@ -76,12 +76,12 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 			player.unload()
 			setSound("");
 			setSoundReady(false);
-			console.log("UNLOADED")
+			// console.log("UNLOADED")
 		}
 	}, [shuffled, player])
-	useEffect(() => {
-		console.log(`${data.targetWord.toLowerCase()} : ${player}`)	
-	})
+	// useEffect(() => {
+	// 	console.log(`${data.targetWord.toLowerCase()} : ${player}`)	
+	// })
 
     return (
 		<span className={`inline-block p-4 cursor-pointer absolute z-10 top-0 left-0 transition supports-hover:hover:scale-90${soundError.length ? " pointer-events-none sm:max-w-[200px]" : ""}`} onClick={(e) => handleAudioClick(e)}>
