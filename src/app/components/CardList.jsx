@@ -39,6 +39,7 @@ const CardList = ({ data }) => {
 					{words.slice(0, activeIndex + 3).map((item, index) => {
 						return (
 							<Card
+								key={item.rank}
 								words={words}
 								shuffled={shuffled}
 								handleShuffleCards={handleShuffleCards}

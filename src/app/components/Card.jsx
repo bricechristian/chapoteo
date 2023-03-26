@@ -15,14 +15,13 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 	const [clicked, setClicked] = useState(false);
 	const [played, setPlayed] = useState(false);
 	const [initialLoad, setInitialLoad] = useState(false);
-	const [sound, setSound] = useState("");
+	const [sound, setSound] = useState(data.mp3 ? data.mp3 : "");
 	const [soundError, setSoundError] = useState("");
 
 	const { player, load, play, stop, volume, ready, loading, playing } = useAudioPlayer({
         src: sound,
         format: "mp3",
         autoplay: false,
-		preload: false,
 		onplay: () => {
 			setPlayed(true);
 			setInitialLoad(false);
@@ -61,7 +60,6 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 	}
 	useEffect(() => {
 		if(soundReady && !loading && sound.length && clicked) {
-			load();
 			play();
 		}
 	}, [soundReady, loading, sound, clicked])
@@ -79,9 +77,9 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 			// console.log("UNLOADED")
 		}
 	}, [shuffled, player])
-	// useEffect(() => {
-	// 	console.log(`${data.targetWord.toLowerCase()} : ${player}`)	
-	// })
+	useEffect(() => {
+		console.log(`${data.targetWord.toLowerCase()} : ${sound}`)	
+	})
 
     return (
 		<span className={`inline-block p-4 cursor-pointer absolute z-10 top-0 left-0 transition supports-hover:hover:scale-90${soundError.length ? " pointer-events-none sm:max-w-[200px]" : ""}`} onClick={(e) => handleAudioClick(e)}>
