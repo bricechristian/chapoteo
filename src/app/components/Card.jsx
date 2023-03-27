@@ -69,14 +69,14 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 			setClicked(false);
 		}
 	}, [playing])
-	useEffect(() => {
-		if(shuffled && player){
-			player.unload()
-			setSound("");
-			setSoundReady(false);
-			// console.log("UNLOADED")
-		}
-	}, [shuffled, player])
+	// useEffect(() => {
+	// 	if(shuffled && player){
+	// 		player.unload()
+	// 		setSound("");
+	// 		setSoundReady(false);
+	// 		// console.log("UNLOADED")
+	// 	}
+	// }, [shuffled, player])
 	useEffect(() => {
 		console.log(`${data.targetWord.toLowerCase()} : ${sound}`)	
 	})
