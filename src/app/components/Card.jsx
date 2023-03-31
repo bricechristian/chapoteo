@@ -44,12 +44,12 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 			const response = await fetch(`/api/audio?word=${data.targetWord.toLowerCase()}`);
 			if(response.ok){
 				const audioData = await response.json();
-				if(Object.keys(audioData.data).length === 0){
+				const { audioKey } = await audioData;
+				if(Object.keys(audioKey).length === 0){
 					setInitialLoad(false);
 					setSoundError("Sorry, sound not available.")
 				} else {
-					const { pathmp3 } = await audioData.data;
-					setSound(pathmp3);
+					setSound(`https://media.merriam-webster.com/audio/prons/es/me/mp3/${audioKey.slice(0,1)}/${audioKey}.mp3`);
 					setSoundReady(true);
 				}
 			} else {
