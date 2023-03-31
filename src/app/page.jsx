@@ -4,6 +4,7 @@ import {
 	ArrowRightIcon,
 	ArrowLeftIcon,
 	RectangleStackIcon,
+	ArrowPathIcon
 } from "@heroicons/react/24/solid";
 
 import data from "../../public/vocab.json";
@@ -37,6 +38,11 @@ const Home = () => {
 						Click{" "}
 						<RectangleStackIcon className="w-4 inline-flex relative bottom-px" />{" "}
 						to shuffle the cards and start over.
+					</li>
+					<li className="list-decimal">
+						Click{" "}
+						<ArrowPathIcon className="w-4 inline-flex relative bottom-px" />{" "}
+						to reset the cards and start over.
 					</li>
 				</ol>
 			</div> 

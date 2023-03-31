@@ -5,6 +5,7 @@ import {
 	ArrowRightIcon,
 	ArrowLeftIcon,
 	RectangleStackIcon,
+	ArrowPathIcon,
 	SpeakerWaveIcon,
 } from "@heroicons/react/24/solid";
 import { AudioPlayerProvider, useAudioPlayer } from "react-use-audio-player"
@@ -78,7 +79,7 @@ const AudioPlayer = ({ data, shuffled, activeIndex } ) => {
 	// 	}
 	// }, [shuffled, player])
 	useEffect(() => {
-		console.log(`${data.targetWord.toLowerCase()} : ${sound}`)	
+		// console.log(`${data.targetWord.toLowerCase()} : ${sound}`)	
 	})
 
     return (
@@ -94,6 +95,7 @@ const Card = ({
 	cardIndex,
 	shuffled,
 	handleShuffleCards,
+	handleResetCards,
 	activeIndex,
 	setActiveIndex,
 }) => {
@@ -183,7 +185,7 @@ const Card = ({
 						</div>
 					</span>
 					<span
-						className={`p-6 absolute bottom-0 inset-x-0 mx-auto flex justify-center transition${
+						className={`p-6 absolute bottom-0 inset-x-0 mx-auto flex justify-center gap-5 transition${
 							flipped ? " opacity-0" : ""
 						}`}>
 						<div className="relative inline-flex group">
@@ -194,6 +196,16 @@ const Card = ({
 							<span
 								className={`caps-12 absolute top-0 invisible inset-x-0 mx-auto -ml-6  transition-smooth supports-hover:group-hover:visible supports-hover:group-hover:-translate-y-5`}>
 								Shuffle
+							</span>
+						</div>
+						<div className="relative inline-flex group">
+							<ArrowPathIcon
+								className={`w-7 inline-flex mx-auto cursor-pointer transition select-none supports-hover:hover:scale-90`}
+								onClick={() => handleResetCards()}
+							/>
+							<span
+								className={`caps-12 absolute top-0 invisible inset-x-0 mx-auto -ml-3.5  transition-smooth supports-hover:group-hover:visible supports-hover:group-hover:-translate-y-5`}>
+								Reset
 							</span>
 						</div>
 					</span>
