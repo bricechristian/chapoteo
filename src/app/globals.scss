@@ -120,6 +120,13 @@
   }
 }
 
+@media (max-height: 690px) and (orientation: portrait){
+	ol.instructions {
+	  @apply text-12;
+	}
+  }
+  
+
 body.mobile {
 	min-height: -webkit-fill-available;
 }	
